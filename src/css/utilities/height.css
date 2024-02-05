@@ -1,7 +1,0 @@
-/* Add new properties to calc screen sizes without any browsers navbar 
- Note - this will be add by default in Tailwind around December 2023
-*/
-.h-screen-dvh {
-   height: 100vh; /* fallback */
-   height: 100dvh;
-}
