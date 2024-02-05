@@ -4,7 +4,6 @@
 
 /* utilities layer */
 @import "./utilities/richtext.css";
-@import "./utilities/height.css";
 
 /* Tailwind */
 @tailwind base;
