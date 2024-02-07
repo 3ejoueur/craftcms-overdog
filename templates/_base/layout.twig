@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="{{currentSite.language}}">
-	<head>
-      {# 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ currentSite.language }}">
+  <head>
+    {# 
       -------------------------------------------------------------------
          Preconnect to external ressources
-         If you're not utilizing S3 with a CDN, you can safely remove these.
       -------------------------------------------------------------------
-      #}	
-		<link rel="preconnect" href="{{ alias('@imagesUrl') }}" crossorigin>
-		<link rel="preconnect" href="{{ alias('@docsUrl') }}" crossorigin>
-      {# 
+      #}
+    <link rel="preconnect" href="{{ alias('@imagesUrl') }}" crossorigin />
+    <link rel="preconnect" href="{{ alias('@docsUrl') }}" crossorigin />
+    {# 
       -------------------------------------------------------------------
          Meta
       -------------------------------------------------------------------
-      #}	
-      <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="{{ entry.seoDescription|default(globalSeo.seoDescription ?? '') }}">
-      {# override by setting robotIndex var in your template, ex: for clients portal #}
-		<meta name="robots" content="{{ robotIndex|default('index, follow') }}">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="default">
-      {# 
+      #}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{{ entry.seoDescription|default(globalSeo.seoDescription ?? '') }}" />
+    {# override by setting robotIndex var in your template, ex: for clients portal #}
+    <meta name="robots" content="{{ robotIndex|default('index, follow') }}" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    {# 
       -------------------------------------------------------------------
          Page Title
          You have the option to customize it individually for each template 
          using the "seoTitle" variable.
       -------------------------------------------------------------------
-      #}	
-      {% if seoTitle is not defined %}
-         {% set seoTitle = entry is defined ? entry.title ~ ' | ' ~ currentSite.group.name : currentSite.group.name %}
-      {% endif %}
-      <title>{{ seoTitle }}</title>		
-      {# 
+      #}
+    {% if seoTitle is not defined %}
+      {% set seoTitle = entry is defined ? (entry.seoTitle ?? entry.title ~ ' | ' ~ currentSite.group.name) : currentSite.group.name %}
+    {% endif %}
+    <title>{{ seoTitle }}</title>
+    {# 
       -------------------------------------------------------------------
          Languages / Sites
          These are the available languages for the current page, managed 
@@ -41,117 +40,118 @@
          meta tag and can also be used for a language switcher if required.
          Docs: https://github.com/ianreidlangevin/craftcms-switcher
       -------------------------------------------------------------------
-      #}	
-      {% set availableSites = getSwitcherSites(switcherCustomSource|default(entry ?? null)) %}
-      {# 
+      #}
+    {% set availableSites = getSwitcherSites(switcherCustomSource|default(entry ?? null)) %}
+    {# 
       -------------------------------------------------------------------
          Favicon
       -------------------------------------------------------------------
-      #}	
-		<link rel="shortcut icon" href="{{ alias('@rootUrl') }}/img/favicon.png">
-      {# 
+      #}
+    <link rel="shortcut icon" href="{{ alias('@rootUrl') }}/img/favicon.png" />
+    {# 
       -------------------------------------------------------------------
          Font declaration - Only applicable when using local fonts.
          It is considered a best practice to inline the font declaration 
          to allow the browser to discover it quickly. Delete this section 
          if you are using web font services instead.
       -------------------------------------------------------------------
-      #}	
-      {{ include('_abstracts/font-face.twig', ignore_missing = true) }}
-      {# 
+      #}
+    {{ include('_abstracts/font-face.twig', ignore_missing = true) }}
+    {# 
       -------------------------------------------------------------------
          Critical CSS, CSS and JavaScript
       -------------------------------------------------------------------
-      #}	
-		{% if getenv('CRITICALCSS') == 1 and entry is defined and entry.uri == "__home__" %}
-         <style>{{ source('_abstracts/critical/critical.css', ignore_missing = true) }}</style>
-         {{ include('_abstracts/non-critical.twig', ignore_missing = true) }}
-      {% else %}
-         {{ include('_abstracts/style.twig', ignore_missing = true) }}
-      {% endif %}
-      {{ include('_abstracts/script.twig', ignore_missing = true) }}
-      {# 
+      #}
+    {% if getenv('CRITICALCSS') == 1 and entry is defined and entry.uri == '__home__' %}
+      <style></style>
+      {{ include('_abstracts/non-critical.twig', ignore_missing = true) }}
+    {% else %}
+      {{ include('_abstracts/style.twig', ignore_missing = true) }}
+    {% endif %}
+    {{ include('_abstracts/script.twig', ignore_missing = true) }}
+    {# 
       -------------------------------------------------------------------
          Meta Open-Graph Properties
          These meta tags define Open Graph properties for the page.
       -------------------------------------------------------------------
-      #}	
-		<meta property="og:locale" content="{{ currentSite.language }}">
-      {% if availableSites|length %}
-         {% for item in availableSites %}
-            <meta property="og:locale:alternate" content="{{ item.site.language }}">
-         {% endfor %}
+      #}
+    <meta property="og:locale" content="{{ currentSite.language }}" />
+    {% if availableSites|length %}
+      {% for item in availableSites %}
+        <meta property="og:locale:alternate" content="{{ item.site.language }}" />
+      {% endfor %}
+    {% endif %}
+    <meta property="og:site_name" content="{{ currentSite.group.name }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ craft.app.request.absoluteUrl }}" />
+    <meta property="og:title" content="{{ seoTitle }}" />
+    <meta property="og:description" content="{{ entry.seoDescription|default(globalSeo.seoDescription ?? '') }}" />
+    {# OG Image #}
+    {% set ogImageField = entry.seoOgImage|default(globalSeo.seoOgImage ?? null) %}
+    {% if ogImageField %}
+      {% set ogImage = ogImageField.one() %}
+      {% if ogImage %}
+        <meta property="og:image" content="{{ ogImage.url }}" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       {% endif %}
-		<meta property="og:site_name" content="{{ currentSite.group.name }}">
-		<meta property="og:type" content="website">
-		<meta property="og:url" content="{{ craft.app.request.absoluteUrl }}">
-		<meta property="og:title" content="{{ seoTitle }}">
-		<meta property="og:description" content="{{ entry.seoDescription|default(globalSeo.seoDescription ?? '') }}">
-		{# OG Image #}
-		{% set ogImageField = entry.seoOgImage|default(globalSeo.seoOgImage ?? null ) %}
-		{% if ogImageField %}
-			{% set ogImage = ogImageField.one() %}
-         {% if ogImage %}
-            <meta property="og:image" content="{{ ogImage.url }}">
-            <meta property="og:image:type" content="image/jpeg">
-            <meta property="og:image:width" content="1200">
-            <meta property="og:image:height" content="630">
-         {% endif %}
-		{% endif %}
-	</head>
-   {# 
+    {% endif %}
+  </head>
+  {# 
    -------------------------------------------------------------------
       Body and Main Layout Structure
    -------------------------------------------------------------------
-   #}		
-	<body>
-		<a class="sr-only" href="#main">{{ 'Skip to main content'|t }}</a>
-      {# 
+   #}
+  <body>
+    <a class="sr-only" href="#main">{{ 'Skip to main content'|t }}</a>
+    {# 
       -------------------------------------------------------------------
          Navbar
       -------------------------------------------------------------------
-      #}		
-      {{ include('_navigation/navbar', ignore_missing = true) }}
-      {# 
+      #}
+    {{ include('_navigation/navbar', ignore_missing = true) }}
+    {# 
       -------------------------------------------------------------------
          Block Header
          You can override this on a per-template basis using the block tag.
       -------------------------------------------------------------------
       #}
-      {% block header %}
-         {{ include('_base/header', ignore_missing = true) }}
-      {% endblock %}
-      {# 
+    {% block header %}
+      {{ include('_base/header', ignore_missing = true) }}
+    {% endblock %}
+    {# 
       -------------------------------------------------------------------
          Block content and main tag
          You can override this on a per-template basis using the block tag.
       -------------------------------------------------------------------
       #}
-      <main id="#main">
-			{% block content %}{% endblock %}
-		</main>
-      {# 
+    <main id="#main">
+      {% block content %}
+      {% endblock %}
+    </main>
+    {# 
       -------------------------------------------------------------------
          Footer
       -------------------------------------------------------------------
       #}
-		{{ include('_base/footer', ignore_missing = true) }}
-      {# 
+    {{ include('_base/footer', ignore_missing = true) }}
+    {# 
       -------------------------------------------------------------------
          Tracking Codes
       -------------------------------------------------------------------
       #}
-		{% if getenv('TRACKING_CODE') == 1 %}
-         {# insert tracking codes here #}
-      {% endif %}
-      {# 
+    {% if getenv('TRACKING_CODE') == 1 %}
+      {# insert tracking codes here #}
+    {% endif %}
+    {# 
       -------------------------------------------------------------------
          You can include a JSON-LD schema within this block.
          Refer to the docs at: https://json-ld.org/ for more informations
          on how to structure the JSON-LD data for schema implementation.
       -------------------------------------------------------------------
       #}
-		{% block schema %}{% endblock %}
-	</body>
-
+    {% block schema %}
+    {% endblock %}
+  </body>
 </html>

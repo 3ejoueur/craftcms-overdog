@@ -1,4 +1,4 @@
-dateModified: 1699994958
+dateModified: 1707322065
 elementSources:
   craft\elements\Entry:
     -
@@ -66,6 +66,7 @@ fs:
     url: $S3_IMAGES_URL
 meta:
   __names__:
+    5a7206c0-34a9-4e35-89bd-fd93a9bc943c: 'SEO Title' # SEO Title
     7d923ca0-fc68-4351-98ec-1274de3906db: Home # Home
     9b18697d-2ce6-492b-b628-1a649bb22eaa: 'SEO Open Graph Image' # SEO Open Graph Image
     228f18ac-b71c-4021-8f66-0d34f29a880f: 'SEO global' # SEO global
