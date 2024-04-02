@@ -59,8 +59,9 @@ return [
 
       // Overdog opinionated - Aliases
       'aliases' => [
-         '@webroot' => dirname(__DIR__) . '/web',
-         '@rootUrl' => App::env('SITE_URL'),
+        '@web' => App::env('SITE_URL'),
+        '@webroot' => dirname(__DIR__) . '/web',
+        '@rootUrl' => App::env('SITE_URL'),
          /**
           *  AWS Cloudfront URLs
           *  Used in layout.twig with the preconnect attribute 
