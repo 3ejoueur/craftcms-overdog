@@ -1,4 +1,4 @@
-{% set env = getenv('ENVIRONMENT') %}
+{% set env = getenv('CRAFT_ENVIRONMENT') %}
 {% if env == 'production' %}
 # robots.txt for {{ siteUrl }}
 Sitemap: {{ siteUrl }}sitemap.xml
@@ -8,4 +8,7 @@ Disallow: /vendor/
 Disallow: /.env
 Disallow: /admin/
 Disallow: /admin
+{% else %}
+User-agent: *
+Disallow: /
 {% endif %}
