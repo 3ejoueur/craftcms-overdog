@@ -1,5 +1,5 @@
 
-# Overdog - A scaffolding project for Craft CMS 4.x
+# Overdog - A scaffolding project for Craft CMS 5.x
 
 
 ### [Click here for documentation](https://st.overdog.io/)
