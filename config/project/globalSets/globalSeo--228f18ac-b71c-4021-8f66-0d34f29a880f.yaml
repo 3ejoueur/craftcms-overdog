@@ -2,27 +2,35 @@ fieldLayouts:
   ee1c6b87-b3b5-4dff-ad80-5f67ec852520:
     tabs:
       -
+        elementCondition: null
         elements:
           -
+            elementCondition: null
             fieldUid: d3974314-8390-48bd-af85-f938616558be # SEO Description
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 876664b1-e054-4d95-80cc-d1260faf1580
+            userCondition: null
             warning: null
             width: 100
           -
+            elementCondition: null
             fieldUid: 9b18697d-2ce6-492b-b628-1a649bb22eaa # SEO Open Graph Image
             instructions: null
             label: null
             required: false
             tip: null
             type: craft\fieldlayoutelements\CustomField
+            uid: 20831920-4459-4252-a655-48bf7bba6616
+            userCondition: null
             warning: null
             width: 100
         name: SEO
-        sortOrder: 1
+        uid: baf50398-aa3e-4db5-99be-8fc3154a4212
+        userCondition: null
 handle: globalSeo
 name: 'SEO global'
 sortOrder: 1

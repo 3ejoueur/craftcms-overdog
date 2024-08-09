@@ -2,6 +2,7 @@ fieldLayouts:
   f4591f0b-3fc0-417e-a5ef-0d553b6588e0:
     tabs:
       -
+        elementCondition: null
         elements:
           -
             autocapitalize: true
@@ -9,7 +10,9 @@ fieldLayouts:
             autocorrect: true
             class: null
             disabled: false
+            elementCondition: null
             id: null
+            inputType: null
             instructions: null
             label: null
             max: null
@@ -25,10 +28,12 @@ fieldLayouts:
             title: null
             type: craft\fieldlayoutelements\assets\AssetTitleField
             uid: bc8fc5a5-c53a-4434-a83f-396099aaa290
+            userCondition: null
             warning: null
             width: 100
         name: Content
         uid: c3963486-64b1-4451-8a4c-e466dcf5a99e
+        userCondition: null
 fs: fileSystemsImages
 handle: volumeImages
 name: Images

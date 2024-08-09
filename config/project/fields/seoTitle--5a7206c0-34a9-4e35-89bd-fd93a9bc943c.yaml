@@ -1,6 +1,5 @@
 columnSuffix: msqjtwzc
 contentColumnType: text
-fieldGroup: a7870a18-8ec8-42bd-bb94-ea232c8eb066 # SEO
 handle: seoTitle
 instructions: 'Used to replace the page title. Useful to allow webmaster to set custom sentence as title.'
 name: 'SEO Title'

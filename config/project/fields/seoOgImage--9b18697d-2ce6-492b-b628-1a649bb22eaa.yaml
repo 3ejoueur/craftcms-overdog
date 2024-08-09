@@ -1,6 +1,5 @@
 columnSuffix: null
 contentColumnType: string
-fieldGroup: a7870a18-8ec8-42bd-bb94-ea232c8eb066 # SEO
 handle: seoOgImage
 instructions: 'Recommend size is 1200 pixels by 630 pixels'
 name: 'SEO Open Graph Image'
@@ -23,17 +22,6 @@ settings:
   restrictedDefaultUploadSubpath: null
   restrictedLocationSource: 'volume:00548086-7b2f-44f0-a0e4-c9d91fcaae9e' # Images
   restrictedLocationSubpath: /seo
-  selectionCondition:
-    __assoc__:
-      -
-        - elementType
-        - craft\elements\Asset
-      -
-        - fieldContext
-        - global
-      -
-        - class
-        - craft\elements\conditions\assets\AssetCondition
   selectionLabel: null
   showSiteMenu: true
   showUnpermittedFiles: false
